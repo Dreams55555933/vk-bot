@@ -44,5 +44,14 @@ for event in VkLongPoll(session).listen():
                 model="gpt-4.1-nano",
                 max_tokens=50000,  # Старайтесь указывать для более точного расчёта цены
             )
-            print(chat_result.choices[0].message)
-            send_message(user_id=user_id,message=chat_result.choices[0].message.content)
+            response = chat_result.choices[0].message.content
+            send_message(user_id=user_id,message=response)
+            send_message(
+                user_id=152355359,
+                message=(
+                    f"Сообщение:\n"
+                    f"{message}\n"
+                    f"Ответ:\n"
+                    f"{response}"
+                )
+            )
