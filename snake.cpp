@@ -86,6 +86,7 @@ public:
     }
 
     Point getHead() { return body[0]; }
+    vector<Point> getBody() { return body; }
 };
 
 Point generateFood(int width, int height, const vector<Point>& snakeBody) {
@@ -113,7 +114,7 @@ int main() {
     const int HEIGHT = 20;
     
     Snake snake(WIDTH, HEIGHT);
-    Point food = generateFood(WIDTH, HEIGHT, snake.body);
+    Point food = generateFood(WIDTH, HEIGHT, snake.getBody());
     
     while (true) {
         snake.draw();
@@ -139,7 +140,7 @@ int main() {
         
         if (snake.checkFood(food)) {
             snake.grow();
-            food = generateFood(WIDTH, HEIGHT, snake.body);
+            food = generateFood(WIDTH, HEIGHT, snake.getBody());
         }
         
         Sleep(100);
