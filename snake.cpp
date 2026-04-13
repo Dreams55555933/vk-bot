@@ -114,7 +114,8 @@ int main() {
     const int HEIGHT = 20;
     
     Snake snake(WIDTH, HEIGHT);
-    Point food = generateFood(WIDTH, HEIGHT, snake.getBody());
+    vector<Point> snakeBody = snake.getBody();
+    Point food = generateFood(WIDTH, HEIGHT, snakeBody);
     
     while (true) {
         snake.draw();
@@ -132,7 +133,7 @@ int main() {
         
         if (snake.checkCollision()) {
             system("cls");
-            cout << "Game Over! Your score: " << snake.getHead().x + snake.getHead().y << endl;
+            cout << "Game Over! Your score: " << snake.getBody().size() - 3 << endl;
             cout << "Press any key to exit..." << endl;
             _getch();
             break;
@@ -140,7 +141,8 @@ int main() {
         
         if (snake.checkFood(food)) {
             snake.grow();
-            food = generateFood(WIDTH, HEIGHT, snake.getBody());
+            snakeBody = snake.getBody();
+            food = generateFood(WIDTH, HEIGHT, snakeBody);
         }
         
         Sleep(100);
